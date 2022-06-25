@@ -1,4 +1,4 @@
-# SuperChat (Youtube Live Stream Chat Mock)
+# SuperChat (Chat Mock)
 
 The web application is hosted [here](https://surijatin.github.io/superchat) via github pages.
 
