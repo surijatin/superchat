@@ -9,6 +9,7 @@ import ResponsiveAppBar from './ResponsiveAppBar'
 import SendIcon from '@mui/icons-material/Send'
 import Avatar from '@mui/material/Avatar'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import Filter from 'bad-words'
 
 firebase.initializeApp({
     apiKey: 'AIzaSyCrTrASB0BlaEop6g0zsT8-J24rXpQbMdI',
@@ -104,13 +105,16 @@ const ChatRoom = () => {
         if (msgValue) {
             const { uid, photoURL } = auth.currentUser
             setMsgValue('')
-            await messagesRef.add({
-                text: msgValue,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                uid,
-                photoURL,
-            })
-            dummy.current.scrollIntoView({ behavior: 'smooth' })
+            const filter = new Filter()
+            if (!filter.isProfane(msgValue)) {
+                await messagesRef.add({
+                    text: msgValue,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    uid,
+                    photoURL,
+                })
+                dummy.current.scrollIntoView({ behavior: 'smooth' })
+            }
         }
     }
 
