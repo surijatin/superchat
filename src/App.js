@@ -25,7 +25,7 @@ const auth = firebase.auth()
 const firestore = firebase.firestore()
 
 function App() {
-    const [user, loading, error] = useAuthState(auth)
+    const [user, loading] = useAuthState(auth)
     const isMobile = useMediaQuery('(max-width:480px)')
 
     const signInWithGoogle = () => {
